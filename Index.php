@@ -18,8 +18,9 @@
             justify-content: space-around;
             align-items: center;
         }
-        .Font , .Title{
+        .Font , .Title , #Output_Perfect , #Output_Prime , td{
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
         }
         .Title{
             padding: 10px;
@@ -42,7 +43,7 @@
             border: 1px solid black;
             border-radius: 50px;
             width: 70%;
-            height: 550px;
+            height: max-content;
         }
         .Inputs{
             text-align: center;
@@ -66,29 +67,16 @@
             transform: scale(1.1);
             box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
         }
-        .btn
+        #Output_Perfect{
+            width: max-content;
+            margin: 15px auto 0 auto;
+        }
+        td{
+            border: 1px solid rgb(120, 247, 177);
+            padding: 10px;
+            text-align: center;
+        }
     </style>
-    <script type="text/javascript">
-        function ShowNum(){
-            var FinalNumber = Number(document.getElementById("FinalNum_Perfect").value);
-            var PerfectNumbers = new Array(FinalNumber + 1); 
-                for(var i = 1; i <= FinalNumber; i++)
-                {
-                    var Sum = 0;
-                    for(var j = 1; j < i; j++)
-                    {
-                        if(i % j == 0)
-                        {
-                            Sum += j;
-                        }
-                    }
-                    if(Sum == i){
-                        PerfectNumbers.push(i);
-                    }
-                }
-                window.alert(PerfectNumbers);
-            }
-    </script>
 </head>
 <body>
     <div id="Header" class="Font">
@@ -109,22 +97,60 @@
         </div>
     </div>
     <div id="PerfectNum" style="margin-top: 130px;">
-        <form>
+        <form method="post" action="">
             <h3 class="Font">Recognition of perfect numbers</h3>
             <label for="FinalNum_Perfect" class="Font">Enter your final number: </label>
-            <input type="text" id="FinalNum_Perfect" class="Inputs">
-            <input type="button" onclick="ShowNum()" value="Exec" style="border: none; border-radius: 25px; padding: 10px;">
+            <input type="text" id="FinalNum_Perfect" name="FinalNum_Perfect" class="Inputs">
+            <input type="submit" value="Exec" onclick="ShowPerfect()" style="border: none; border-radius: 25px; padding: 10px;">
+            <div id="Output_Perfect">
+                <?php
+                    function ShowPerfect(){
+                        if($_SERVER["REQUEST_METHOD"] === "POST")
+                        {
+                            $FinalPerfect = htmlspecialchars($_POST['FinalNum_Perfect']);
+                            if(empty($FinalPerfect))
+                                echo ("Input is empty");
+                            else if($FinalPerfect > 0)
+                            {
+                                echo ("<table>");
+                                    for ($i=1; $i <= $FinalPerfect; $i++) 
+                                    { 
+                                        $Sum = 0;
+                                        for ($j=1 ; $j < $i; $j++) 
+                                        { 
+                                            if($i % $j === 0)
+                                                $Sum += $j;
+                                        }
+                                        if($Sum === $i)
+                                        {
+                                            echo ("<td>");
+                                            echo ("$j");
+                                            echo ("</td>");
+                                        }
+                                    }
+                                echo ("</table>");
+                            }
+                            $_POST = [];
+                        }
+                    }
+                    ShowPerfect();
+                ?>
+            </div>
         </form>
     </div>
     <div id="PrimeNum" style="margin-top: 100px;">
-        <form>
+        <form method="post" action="">
             <h3>Recognition of prime numbers</h3>
             <label for="FinalNum_Prime" class="Font">Enter your final number: </label>
-            <input type="text" id="FinalNum_Prime" class="Inputs">
+            <input type="text" id="FinalNum_Prime" name="FinalNum_Prime" class="Inputs">
+            <input type="submit" value="Exec" onclick="ShowPrime()" style="border: none; border-radius: 25px; padding: 10px;">
+            <div id="Output_Prime">
+                
+            </div>
         </form>
     </div>
     <div id="PrintStars" style="margin: 100px auto 50px auto;">
-        <form>
+        <form method="post" action="">
             <h3>Printing stars according to your wishes</h3>
             <label for="SelectPosition" class="Font">Choose your desired mode.</label>
             <select id="SelectPosition" class="Inputs">
@@ -133,6 +159,7 @@
                 <option value="Top">Top</option>
                 <option value="Down">Down</option>
             </select>
+            <button type="submit" onclick="" style="border: none; border-radius: 25px; padding: 10px;"> Exec </button>
         </form>
     </div>
     <div id="Home">
