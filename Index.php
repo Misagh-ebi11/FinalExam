@@ -49,6 +49,7 @@
             border: none;
             border-radius: 25px;
             width: 150px;
+            padding: 10px;
         }
         #btnHome{
             width: 40px;
@@ -67,6 +68,27 @@
         }
         .btn
     </style>
+    <script type="text/javascript">
+        function ShowNum(){
+            var FinalNumber = Number(document.getElementById("FinalNum_Perfect").value);
+            var PerfectNumbers = new Array(FinalNumber + 1); 
+                for(var i = 1; i <= FinalNumber; i++)
+                {
+                    var Sum = 0;
+                    for(var j = 1; j < i; j++)
+                    {
+                        if(i % j == 0)
+                        {
+                            Sum += j;
+                        }
+                    }
+                    if(Sum == i){
+                        PerfectNumbers.push(i);
+                    }
+                }
+                window.alert(PerfectNumbers);
+            }
+    </script>
 </head>
 <body>
     <div id="Header" class="Font">
@@ -91,6 +113,7 @@
             <h3 class="Font">Recognition of perfect numbers</h3>
             <label for="FinalNum_Perfect" class="Font">Enter your final number: </label>
             <input type="text" id="FinalNum_Perfect" class="Inputs">
+            <input type="button" onclick="ShowNum()" value="Exec" style="border: none; border-radius: 25px; padding: 10px;">
         </form>
     </div>
     <div id="PrimeNum" style="margin-top: 100px;">
