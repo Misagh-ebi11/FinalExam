@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
     <style>
         body{
             text-align: center;
@@ -97,11 +96,11 @@
         </div>
     </div>
     <div id="PerfectNum" style="margin-top: 130px;">
-        <form method="post" action="">
+        <form method="post" action="" id="Perfect">
             <h3 class="Font">Recognition of perfect numbers</h3>
             <label for="FinalNum_Perfect" class="Font">Enter your final number: </label>
             <input type="text" id="FinalNum_Perfect" name="FinalNum_Perfect" class="Inputs">
-            <input type="submit" value="Exec" onclick="ShowPerfect()" style="border: none; border-radius: 25px; padding: 10px;">
+            <input type="submit" value="Exec" style="border: none; border-radius: 25px; padding: 10px;">
             <div id="Output_Perfect">
                 <?php
                     function ShowPerfect(){
@@ -139,13 +138,45 @@
         </form>
     </div>
     <div id="PrimeNum" style="margin-top: 100px;">
-        <form method="post" action="">
+        <form method="post" action="" id="Prime">
             <h3>Recognition of prime numbers</h3>
             <label for="FinalNum_Prime" class="Font">Enter your final number: </label>
             <input type="text" id="FinalNum_Prime" name="FinalNum_Prime" class="Inputs">
-            <input type="submit" value="Exec" onclick="ShowPrime()" style="border: none; border-radius: 25px; padding: 10px;">
+            <input type="submit" value="Exec" style="border: none; border-radius: 25px; padding: 10px;">
             <div id="Output_Prime">
-                
+                <?php
+                    function ShowPrime()
+                    {
+                        if($_SERVER["REQUEST_METHOD"] === "POST")
+                        {
+                            $FinalPrime = htmlspecialchars($_POST['FinalNum_Prime']);
+                            if(empty($FinalPrime))
+                                echo "Please enter a number";
+                            else if($FinalPrime <= 1)
+                                echo "Please enter a number bigger than 1";
+                            else
+                            {   
+                                echo ("<table>");
+                                for($Prime = 2; $Prime <= $FinalPrime; $Prime++)
+                                {
+                                    $Is_Prime = true;
+                                    for($i = 2; $i <= sqrt($Prime); $i++)
+                                    {
+                                        if($Prime % $i == 0)
+                                            $Is_Prime = false;
+                                            break;
+                                        if($Is_Prime)
+                                            echo("<td>");
+                                            echo($Prime);
+                                            echo("</td>");
+                                    }
+                                }
+                                echo ("</table>");
+                            }
+                        }
+                    }
+                    ShowPrime();
+                ?>
             </div>
         </form>
     </div>
