@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+            background-image: url("Pictures/Second/vecteezy_abstract-background-design-background-texture-design-with_18752867-1.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        #Content{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .Hspan{
+            color: rgb(120, 247, 177);
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+        }
+        .Button{
+            width: 400px;
+            height: 300px;
+            background-color: rgb(120, 247, 177);
+            margin-left: 0.1%;
+            border: 1px solid black;
+            border-radius: 50px;
+            transition: all 0.5s ease-in-out;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 25px;
+            font-weight: bold;
+        }
+        .Button:hover{
+            transform: scale(1.05);
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="Header" class="Font">
+        <h1>Published by <br> <span class="Hspan">Misagh Ebrahimi</span> <br> A project for <span class="Hspan">final exam</span></h1>
+    </div>
+    <div id="Content">
+        <div>
+            <form action="PerfectNum.php">
+            <input type="submit" value="PerfectNum" class="Button" onclick="window.scrollTo({ top: document.getElementById('PerfectNum').offsetTop - 25, behavior: 'smooth' });">
+            </form>
+        </div>
+        <div>
+            <form action="PrimeNum.php">
+            <input type="submit" value="PrimeNum" class="Button" onclick="window.scrollTo({ top: document.getElementById('PrimeNum').offsetTop - 25, behavior: 'smooth'})">
+            </form>
+        </div>
+        <div>
+            <form action="PrintStars.php">
+            <input type="submit" value="PrintStars" class="Button" onclick="window.scrollTo({ top: document.getElementById('PrintStars').offsetTop - 25, behavior: 'smooth'})">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
