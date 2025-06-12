@@ -13,6 +13,8 @@
             background-attachment: fixed;
             background-size: cover;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
         }
         #PerfectNum{
             background-color: transparent;
@@ -22,6 +24,9 @@
             padding: 20px;
             border: 2px solid black;
             border-radius: 20px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
         }
         label{
             font-size: 20px;
@@ -49,9 +54,6 @@
             padding: 7px;
             border: none;
             border-radius: 15px;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            font-size: 16px;
-            font-weight: bold;
             text-align: center;
             margin: 0 1px 0 8px;
         }
@@ -60,16 +62,28 @@
             background-color: rgb(120, 247, 177);
         }
         #Result{
-            border: 2px solid black;
-            border-radius: 10px;
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 5px;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             font-size: 16px;
             font-weight: bold;
-            text-align: center;
-            padding: 10px;
             width: max-content;
             margin: 15px auto 0 auto;
-            animation: MoveResult 5s infinite;
+        }
+        #Data{
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 10px;
+            transition: all 0.1s ease-in-out;
+            margin: 2px;
+        }
+        #Data:hover{
+            transform: scale(1.05);
+            background-color: cyan;
+        }
+        .Error{
+            animation: Bold 3s infinite;
         }
         @keyframes MoveResult{
             0%{
@@ -82,42 +96,70 @@
                 transform: translateY(-5px);
             }
         }
+        @keyframes Bold{
+            0%{
+                transform: scale(1.05);
+            }
+            50%{
+                transform: scale(1);
+            }
+            100%{
+                transform: scale(1.05);
+            }
+        }
     </style>
-    <script type="text/javascript">
-        function ShowNum(){
-            var FinalNumber = Number(document.getElementById("FinalNum").value);
-            var PerfectNumbers =[]; 
-            var TableBody = document.querySelector("#Result tbody");
-            TableBody.innerHTML = "";
-                for(var i = 1; i <= FinalNumber; i++)
+<body>
+    <div id="PerfectNum">
+    <form method="post">
+        <label for="FinalNum">Enter your final number</label>
+        <input type="text" id="FinalNum" class="Input" name="FinalNum">
+        <input type="submit" class="btn" value="Exec">
+        <div id="Output">
+            <?php
+                function PerfectNum()
                 {
-                    var Sum = 0;
-                    for(var j = 1; j < i; j++)
+                    if($_SERVER["REQUEST_METHOD"] == "POST")
                     {
-                        if(i % j == 0)
+                        $FinalNum = htmlspecialchars($_REQUEST['FinalNum']);
+                        if(empty($FinalNum))
+                        echo('<h3 class="Error">Please enter a number</h3>');
+                        elseif($FinalNum <= 1)
+                            echo('<h3 class="Error">Please enter a number bigger than 1</h3>');
+                        else
                         {
-                            Sum += j;
+                            echo('<table id="Result">');
+                            echo('<tr>');
+                            $Counter = 1;
+                            for ($i=1; $i <= $FinalNum ; $i++) 
+                            { 
+                                $Sum = 0;
+                                for ($j=1; $j < $i; $j++) 
+                                { 
+                                    if($i % $j == 0)
+                                        $Sum += $j;
+                                }
+                                if($Counter == 10)
+                                {
+                                    echo('</tr><tr>');
+                                    $Counter = 1;
+                                }
+                                if($Sum == $i)
+                                {
+                                    echo('<td id="Data">');
+                                    echo($i);
+                                    echo('</td>');
+                                    $Counter++;
+                                }
+                            }
+                            echo('</tr>');
+                            echo('</table>');
                         }
                     }
-                    if(Sum == i){
-                        PerfectNumbers.push(i);
-                    }
                 }
-                var row = TableBody.insertRow();
-                PerfectNumbers.forEach((num) => {
-                    var cell = row.insertCell();
-                    cell.innerHTML = num;
-                }); 
-            }
-    </script>
-<body>
-    <form id="PerfectNum">
-        <label for="FinalNum">Enter your final number</label>
-        <input type="text" id="FinalNum" class="Input">
-        <input type="button" class="btn" value="Exec" onclick="ShowNum()">
-        <table id="Result">
-            <tbody></tbody>
-        </table>
+                PerfectNum();
+            ?>
+        </div>
     </form>
+    </div>
 </body>
 </html>

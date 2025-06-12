@@ -11,20 +11,69 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        #PrintStar{
+            background-color: transparent;
+            width: 80%;
+            height: max-content;
+            margin: 15px auto 0 auto;
+            padding: 20px;
+            border: 2px solid black;
+            border-radius: 20px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        label{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .Input{
+            padding: 7px;
+            width: 200px;
+            border: none;
+            border-radius: 15px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            margin: 0 1px 0 8px;
+            transition: all 0.5s ease-in-out;
+        }
+        .Input:hover{
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 5px;
+            transform: scale(1.05);
+        }
+        .btn , #SelectBox{
+            width: 80px;
+            transition: all 0.5s ease-in-out;
+            padding: 7px;
+            border: none;
+            border-radius: 15px;
+            text-align: center;
+            margin: 0 1px 0 8px;
+        }
+        .btn:hover{
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 5px;
+            background-color: rgb(120, 247, 177);
         }
     </style>
 </head>
 <body>
-    <form id="Form" method="post">
+    <div id="PrintStar">
+    <form method="post">
         <label for="FinalNum">Please enter your number</label>
-        <input type="text" id="FinalNum" name="FinalNum">
-        <select name="Status">
-            <option value="Right">Right</option>
-            <option value="Left">Left</option>
-            <option value="Top">Top</option>
-            <option value="Down">Down</option>
+        <input type="text" id="FinalNum" name="FinalNum" class="Input">
+        <select name="Status" id="SelectBox">
+            <option class="OPT" value="Right">Right</option>
+            <option class="OPT" value="Left">Left</option>
+            <option class="OPT" value="Top">Top</option>
+            <option class="OPT" value="Down">Down</option>
         </select>
-        <input type="submit" value="Exec">
+        <input type="submit" value="Exec" class="btn">
         <div id="Output">
             <?php
                 function PrintStart()
@@ -63,6 +112,7 @@
                 PrintStart();
             ?>
         </div>
+    </div>
     </form>
 </body>
 </html>

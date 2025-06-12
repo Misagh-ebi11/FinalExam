@@ -36,7 +36,9 @@
             width: 200px;
             border: none;
             border-radius: 15px;
-            
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
             text-align: center;
             margin: 0 1px 0 8px;
             transition: all 0.5s ease-in-out;
@@ -80,7 +82,7 @@
             background-color: cyan;
         }
         .Error{
-            animation: Bold 2s infinite;
+            animation: Bold 3s infinite;
         }
         @keyframes MoveResult{
             0%{
