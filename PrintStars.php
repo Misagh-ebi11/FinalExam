@@ -48,7 +48,7 @@
             transform: scale(1.05);
         }
         .btn , #SelectBox{
-            width: 80px;
+            width: max-content;
             transition: all 0.5s ease-in-out;
             padding: 7px;
             border: none;
@@ -59,6 +59,43 @@
         .btn:hover{
             box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 5px;
             background-color: rgb(120, 247, 177);
+        }
+        #Output{
+            margin-top: 20px;
+        }
+        #Left{
+            width: max-content;
+            margin: 0 auto 0 auto;
+            text-align: left;
+        }
+        #Right{
+            width: max-content;
+            margin: 0 auto 0 auto;
+            text-align: right;
+        }
+        #Back_btn{
+            width: max-content;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            margin-top: 15px;
+            transition: all 0.5s ease-in-out;
+            animation: MoveResult 3s infinite;
+        }
+        #Back_btn:hover{
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 5px;
+            background-color: rgb(120, 247, 177);
+        }
+        @keyframes MoveResult{
+            0%{
+                transform: translateY(-5px);
+            }
+            50%{
+                transform: translateY(5px);
+            }
+            100%{
+                transform: translateY(-5px);
+            }
         }
     </style>
 </head>
@@ -74,7 +111,6 @@
             <option class="OPT" value="Down">Down</option>
         </select>
         <input type="submit" value="Exec" class="btn">
-        <div id="Output">
             <?php
                 function PrintStart()
                 {
@@ -89,30 +125,67 @@
                             echo "Enter a number bigger than 0";
                         else
                         {
+                            echo('<div id="Output">');
+                            echo('<table>');
                             switch ($Status) {
                                 case 'Right':
-
+                                    echo("<div id='Right'>");
+                                    for($i = 1; $i <= $FinalNum; $i++)
+                                    {
+                                        for($j = 1; $j <= $i; $j++)
+                                        {
+                                            echo(" * ");
+                                        }
+                                        echo('<br>');
+                                    }
+                                    echo('</div>');
                                 break;
                                 
                                 case 'Left':
-
+                                    echo("<div id='Left'>");
+                                    for($i = 1; $i <= $FinalNum; $i++)
+                                    {
+                                        for($j = 1; $j <= $i; $j++)
+                                        {
+                                            echo(" * ");
+                                        }
+                                        echo('<br>');
+                                    }
+                                    echo('</div>');
                                 break;
 
                                 case 'Top':
-
+                                    for($i = 1; $i <= $FinalNum; $i++)
+                                    {
+                                        for($j = 1; $j <= $i; $j++)
+                                        {
+                                            echo(" * ");
+                                        }
+                                        echo('<br>');
+                                    }
                                 break;
 
                                 case 'Down':
-
+                                    for($i = 1; $i <= $FinalNum; $i++)
+                                    {
+                                        for($j = $FinalNum; $j >= $i; $j--)
+                                        {
+                                            echo(" * ");
+                                        }
+                                        echo('<br>');
+                                    }
                                 break;
                             }
+                            echo('</div>');
                         }
                     }
                 }
                 PrintStart();
             ?>
-        </div>
-    </div>
     </form>
+    <form action="Index.html">
+        <button type="submit" id="Back_btn">Back to home page</button>
+    </form>
+    </div>
 </body>
 </html>

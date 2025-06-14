@@ -84,6 +84,19 @@
         .Error{
             animation: Bold 3s infinite;
         }
+        #Back_btn{
+            width: max-content;
+            padding: 10px;
+            border: none;
+            border-radius: 15px;
+            margin-top: 20px;
+            transition: all 0.5s ease-in-out;
+            animation: MoveResult 3s infinite;
+        }
+        #Back_btn:hover{
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 5px;
+            background-color: rgb(120, 247, 177);
+        }
         @keyframes MoveResult{
             0%{
                 transform: translateY(-5px);
@@ -114,7 +127,7 @@
         <label for="FinalNumber">Please enter your final number</label>
         <input type="text" id="FinalNumber" name="FinalNumber" class="Input">
         <input type="submit" value="Exec" class="btn">
-            <div id="Output">
+        <div id="Output">
             <?php
                 function ShowPrime()
                 {
@@ -160,7 +173,10 @@
                 }
                 ShowPrime()
             ?>
-            </div>
+        </div>
+    </form>
+    <form action="Index.html">
+        <button type="submit" id="Back_btn">Back to home page</button>
     </form>
     </div>
 </body>
